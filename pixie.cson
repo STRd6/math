@@ -1,9 +1,6 @@
 entryPoint: "math"
-version: "0.1.0"
-remoteDependencies: [
-  "http://strd6.github.io/require/v0.2.2.js"
-]
+version: "0.2.0"
 dependencies:
-  point: "STRd6/point:v0.1.0"
-  matrix: "STRd6/matrix:v0.1.0"
-  random: "STRd6/random:v0.1.0"
+  point: "distri/point:v0.2.0"
+  matrix: "distri/matrix:v0.3.1"
+  random: "distri/random:v0.2.0"
