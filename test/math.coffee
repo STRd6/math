@@ -29,3 +29,11 @@ describe "rand", ->
     assert rand
 
     assert rand()?
+
+describe "Size", ->
+  it "should exist", ->
+    assert Size
+
+describe "Math", ->
+  it "should have a version", ->
+    assert require("../math").version

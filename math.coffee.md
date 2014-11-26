@@ -4,6 +4,7 @@ Math
 Require and export many math libraries.
 
     Point = require "point"
+    Size = require "size"
 
     Matrix = require "matrix"
     Matrix.Point = Point
@@ -15,6 +16,8 @@ Require and export many math libraries.
       Matrix: Matrix
       Random: Random
       rand: Random.rand
+      Size: Size
+      version: require("./pixie").version
 
 Pollute all libraries to the global namespace.
 
