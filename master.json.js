@@ -2,171 +2,66 @@ window["distri/math:master"]({
   "source": {
     "LICENSE": {
       "path": "LICENSE",
-      "mode": "100644",
       "content": "The MIT License (MIT)\n\nCopyright (c) 2013 Daniel X Moore\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "mode": "100644",
       "type": "blob"
     },
     "README.md": {
       "path": "README.md",
-      "mode": "100644",
       "content": "math\n====\n\nMath is for cool guys.\n",
+      "mode": "100644",
       "type": "blob"
     },
     "math.coffee.md": {
       "path": "math.coffee.md",
+      "content": "Math\n====\n\nRequire and export many math libraries.\n\n    Point = require \"point\"\n    Size = require \"size\"\n\n    Matrix = require \"matrix\"\n    Matrix.Point = Point\n\n    Random = require \"random\"\n\n    module.exports = self =\n      Point: Point\n      Matrix: Matrix\n      Random: Random\n      rand: Random.rand\n      Size: Size\n      version: require(\"./pixie\").version\n\nPollute all libraries to the global namespace.\n\n      pollute: ->\n        Object.keys(self).forEach (key) ->\n          return if key is \"version\"\n          return if key is \"pollute\"\n\n          global[key] = self[key]\n\n        return self\n",
       "mode": "100644",
-      "content": "Math\n====\n\nRequire and export many math libraries.\n\n    Point = require \"point\"\n\n    Matrix = require \"matrix\"\n    Matrix.Point = Point\n\n    Random = require \"random\"\n\n    module.exports = self =\n      Point: Point\n      Matrix: Matrix\n      Random: Random\n      rand: Random.rand\n\nPollute all libraries to the global namespace.\n\n      pollute: ->\n        Object.keys(self).forEach (key) ->\n          return if key is \"version\"\n          return if key is \"pollute\"\n\n          global[key] = self[key]\n\n        return self\n",
       "type": "blob"
     },
     "pixie.cson": {
       "path": "pixie.cson",
+      "content": "entryPoint: \"math\"\nversion: \"0.2.0\"\ndependencies:\n  point: \"distri/point:v0.2.0\"\n  matrix: \"distri/matrix:v0.3.1\"\n  random: \"distri/random:v0.2.0\"\n  size: \"distri/size:v0.1.0\"\n",
       "mode": "100644",
-      "content": "entryPoint: \"math\"\nversion: \"0.2.0\"\ndependencies:\n  point: \"distri/point:v0.2.0\"\n  matrix: \"distri/matrix:v0.3.1\"\n  random: \"distri/random:v0.2.0\"\n",
       "type": "blob"
     },
     "test/math.coffee": {
       "path": "test/math.coffee",
+      "content": "require(\"../math\").pollute()\n\nconsole.log global\n\ndescribe \"Point\", ->\n  it \"should exist\", ->\n    assert Point\n\n  it \"should construct points\", ->\n    assert Point()\n\ndescribe \"Matrix\", ->\n  it \"should exist and return matrices when invoked\", ->\n    assert Matrix\n\n    assert Matrix()\n\n  it \"should use the same `Point` class\", ->\n    assert Matrix.Point is Point\n\n    assert Matrix().transformPoint(Point()) instanceof Point\n\ndescribe \"Random\", ->\n  it \"should exist\", ->\n    assert Random\n\ndescribe \"rand\", ->\n  it \"should exist\", ->\n    assert rand\n\n    assert rand()?\n\ndescribe \"Size\", ->\n  it \"should exist\", ->\n    assert Size\n\ndescribe \"Math\", ->\n  it \"should have a version\", ->\n    assert require(\"../math\").version\n",
       "mode": "100644",
-      "content": "require(\"../math\").pollute()\n\nconsole.log global\n\ndescribe \"Point\", ->\n  it \"should exist\", ->\n    assert Point\n\n  it \"should construct points\", ->\n    assert Point()\n\ndescribe \"Matrix\", ->\n  it \"should exist and return matrices when invoked\", ->\n    assert Matrix\n\n    assert Matrix()\n\n  it \"should use the same `Point` class\", ->\n    assert Matrix.Point is Point\n\n    assert Matrix().transformPoint(Point()) instanceof Point\n\ndescribe \"Random\", ->\n  it \"should exist\", ->\n    assert Random\n\ndescribe \"rand\", ->\n  it \"should exist\", ->\n    assert rand\n\n    assert rand()?\n",
       "type": "blob"
     }
   },
   "distribution": {
     "math": {
       "path": "math",
-      "content": "(function() {\n  var Matrix, Point, Random, self;\n\n  Point = require(\"point\");\n\n  Matrix = require(\"matrix\");\n\n  Matrix.Point = Point;\n\n  Random = require(\"random\");\n\n  module.exports = self = {\n    Point: Point,\n    Matrix: Matrix,\n    Random: Random,\n    rand: Random.rand,\n    pollute: function() {\n      Object.keys(self).forEach(function(key) {\n        if (key === \"version\") {\n          return;\n        }\n        if (key === \"pollute\") {\n          return;\n        }\n        return global[key] = self[key];\n      });\n      return self;\n    }\n  };\n\n}).call(this);\n\n//# sourceURL=math.coffee",
+      "content": "(function() {\n  var Matrix, Point, Random, Size, self;\n\n  Point = require(\"point\");\n\n  Size = require(\"size\");\n\n  Matrix = require(\"matrix\");\n\n  Matrix.Point = Point;\n\n  Random = require(\"random\");\n\n  module.exports = self = {\n    Point: Point,\n    Matrix: Matrix,\n    Random: Random,\n    rand: Random.rand,\n    Size: Size,\n    version: require(\"./pixie\").version,\n    pollute: function() {\n      Object.keys(self).forEach(function(key) {\n        if (key === \"version\") {\n          return;\n        }\n        if (key === \"pollute\") {\n          return;\n        }\n        return global[key] = self[key];\n      });\n      return self;\n    }\n  };\n\n}).call(this);\n",
       "type": "blob"
     },
     "pixie": {
       "path": "pixie",
-      "content": "module.exports = {\"entryPoint\":\"math\",\"version\":\"0.2.0\",\"dependencies\":{\"point\":\"distri/point:v0.2.0\",\"matrix\":\"distri/matrix:v0.3.1\",\"random\":\"distri/random:v0.2.0\"}};",
+      "content": "module.exports = {\"entryPoint\":\"math\",\"version\":\"0.2.0\",\"dependencies\":{\"point\":\"distri/point:v0.2.0\",\"matrix\":\"distri/matrix:v0.3.1\",\"random\":\"distri/random:v0.2.0\",\"size\":\"distri/size:v0.1.0\"}};",
       "type": "blob"
     },
     "test/math": {
       "path": "test/math",
-      "content": "(function() {\n  require(\"../math\").pollute();\n\n  console.log(global);\n\n  describe(\"Point\", function() {\n    it(\"should exist\", function() {\n      return assert(Point);\n    });\n    return it(\"should construct points\", function() {\n      return assert(Point());\n    });\n  });\n\n  describe(\"Matrix\", function() {\n    it(\"should exist and return matrices when invoked\", function() {\n      assert(Matrix);\n      return assert(Matrix());\n    });\n    return it(\"should use the same `Point` class\", function() {\n      assert(Matrix.Point === Point);\n      return assert(Matrix().transformPoint(Point()) instanceof Point);\n    });\n  });\n\n  describe(\"Random\", function() {\n    return it(\"should exist\", function() {\n      return assert(Random);\n    });\n  });\n\n  describe(\"rand\", function() {\n    return it(\"should exist\", function() {\n      assert(rand);\n      return assert(rand() != null);\n    });\n  });\n\n}).call(this);\n\n//# sourceURL=test/math.coffee",
+      "content": "(function() {\n  require(\"../math\").pollute();\n\n  console.log(global);\n\n  describe(\"Point\", function() {\n    it(\"should exist\", function() {\n      return assert(Point);\n    });\n    return it(\"should construct points\", function() {\n      return assert(Point());\n    });\n  });\n\n  describe(\"Matrix\", function() {\n    it(\"should exist and return matrices when invoked\", function() {\n      assert(Matrix);\n      return assert(Matrix());\n    });\n    return it(\"should use the same `Point` class\", function() {\n      assert(Matrix.Point === Point);\n      return assert(Matrix().transformPoint(Point()) instanceof Point);\n    });\n  });\n\n  describe(\"Random\", function() {\n    return it(\"should exist\", function() {\n      return assert(Random);\n    });\n  });\n\n  describe(\"rand\", function() {\n    return it(\"should exist\", function() {\n      assert(rand);\n      return assert(rand() != null);\n    });\n  });\n\n  describe(\"Size\", function() {\n    return it(\"should exist\", function() {\n      return assert(Size);\n    });\n  });\n\n  describe(\"Math\", function() {\n    return it(\"should have a version\", function() {\n      return assert(require(\"../math\").version);\n    });\n  });\n\n}).call(this);\n",
       "type": "blob"
     }
   },
   "progenitor": {
-    "url": "http://strd6.github.io/editor/"
+    "url": "http://www.danielx.net/editor/"
   },
   "version": "0.2.0",
   "entryPoint": "math",
   "repository": {
-    "id": 13576636,
-    "name": "math",
-    "full_name": "distri/math",
-    "owner": {
-      "login": "distri",
-      "id": 6005125,
-      "avatar_url": "https://identicons.github.com/f90c81ffc1498e260c820082f2e7ca5f.png",
-      "gravatar_id": null,
-      "url": "https://api.github.com/users/distri",
-      "html_url": "https://github.com/distri",
-      "followers_url": "https://api.github.com/users/distri/followers",
-      "following_url": "https://api.github.com/users/distri/following{/other_user}",
-      "gists_url": "https://api.github.com/users/distri/gists{/gist_id}",
-      "starred_url": "https://api.github.com/users/distri/starred{/owner}{/repo}",
-      "subscriptions_url": "https://api.github.com/users/distri/subscriptions",
-      "organizations_url": "https://api.github.com/users/distri/orgs",
-      "repos_url": "https://api.github.com/users/distri/repos",
-      "events_url": "https://api.github.com/users/distri/events{/privacy}",
-      "received_events_url": "https://api.github.com/users/distri/received_events",
-      "type": "Organization",
-      "site_admin": false
-    },
-    "private": false,
-    "html_url": "https://github.com/distri/math",
-    "description": "Math is for cool guys.",
-    "fork": false,
-    "url": "https://api.github.com/repos/distri/math",
-    "forks_url": "https://api.github.com/repos/distri/math/forks",
-    "keys_url": "https://api.github.com/repos/distri/math/keys{/key_id}",
-    "collaborators_url": "https://api.github.com/repos/distri/math/collaborators{/collaborator}",
-    "teams_url": "https://api.github.com/repos/distri/math/teams",
-    "hooks_url": "https://api.github.com/repos/distri/math/hooks",
-    "issue_events_url": "https://api.github.com/repos/distri/math/issues/events{/number}",
-    "events_url": "https://api.github.com/repos/distri/math/events",
-    "assignees_url": "https://api.github.com/repos/distri/math/assignees{/user}",
-    "branches_url": "https://api.github.com/repos/distri/math/branches{/branch}",
-    "tags_url": "https://api.github.com/repos/distri/math/tags",
-    "blobs_url": "https://api.github.com/repos/distri/math/git/blobs{/sha}",
-    "git_tags_url": "https://api.github.com/repos/distri/math/git/tags{/sha}",
-    "git_refs_url": "https://api.github.com/repos/distri/math/git/refs{/sha}",
-    "trees_url": "https://api.github.com/repos/distri/math/git/trees{/sha}",
-    "statuses_url": "https://api.github.com/repos/distri/math/statuses/{sha}",
-    "languages_url": "https://api.github.com/repos/distri/math/languages",
-    "stargazers_url": "https://api.github.com/repos/distri/math/stargazers",
-    "contributors_url": "https://api.github.com/repos/distri/math/contributors",
-    "subscribers_url": "https://api.github.com/repos/distri/math/subscribers",
-    "subscription_url": "https://api.github.com/repos/distri/math/subscription",
-    "commits_url": "https://api.github.com/repos/distri/math/commits{/sha}",
-    "git_commits_url": "https://api.github.com/repos/distri/math/git/commits{/sha}",
-    "comments_url": "https://api.github.com/repos/distri/math/comments{/number}",
-    "issue_comment_url": "https://api.github.com/repos/distri/math/issues/comments/{number}",
-    "contents_url": "https://api.github.com/repos/distri/math/contents/{+path}",
-    "compare_url": "https://api.github.com/repos/distri/math/compare/{base}...{head}",
-    "merges_url": "https://api.github.com/repos/distri/math/merges",
-    "archive_url": "https://api.github.com/repos/distri/math/{archive_format}{/ref}",
-    "downloads_url": "https://api.github.com/repos/distri/math/downloads",
-    "issues_url": "https://api.github.com/repos/distri/math/issues{/number}",
-    "pulls_url": "https://api.github.com/repos/distri/math/pulls{/number}",
-    "milestones_url": "https://api.github.com/repos/distri/math/milestones{/number}",
-    "notifications_url": "https://api.github.com/repos/distri/math/notifications{?since,all,participating}",
-    "labels_url": "https://api.github.com/repos/distri/math/labels{/name}",
-    "releases_url": "https://api.github.com/repos/distri/math/releases{/id}",
-    "created_at": "2013-10-15T00:13:24Z",
-    "updated_at": "2013-12-23T23:29:58Z",
-    "pushed_at": "2013-10-15T18:45:48Z",
-    "git_url": "git://github.com/distri/math.git",
-    "ssh_url": "git@github.com:distri/math.git",
-    "clone_url": "https://github.com/distri/math.git",
-    "svn_url": "https://github.com/distri/math",
-    "homepage": null,
-    "size": 364,
-    "stargazers_count": 0,
-    "watchers_count": 0,
-    "language": "CoffeeScript",
-    "has_issues": true,
-    "has_downloads": true,
-    "has_wiki": true,
-    "forks_count": 0,
-    "mirror_url": null,
-    "open_issues_count": 0,
-    "forks": 0,
-    "open_issues": 0,
-    "watchers": 0,
-    "default_branch": "master",
-    "master_branch": "master",
-    "permissions": {
-      "admin": true,
-      "push": true,
-      "pull": true
-    },
-    "organization": {
-      "login": "distri",
-      "id": 6005125,
-      "avatar_url": "https://identicons.github.com/f90c81ffc1498e260c820082f2e7ca5f.png",
-      "gravatar_id": null,
-      "url": "https://api.github.com/users/distri",
-      "html_url": "https://github.com/distri",
-      "followers_url": "https://api.github.com/users/distri/followers",
-      "following_url": "https://api.github.com/users/distri/following{/other_user}",
-      "gists_url": "https://api.github.com/users/distri/gists{/gist_id}",
-      "starred_url": "https://api.github.com/users/distri/starred{/owner}{/repo}",
-      "subscriptions_url": "https://api.github.com/users/distri/subscriptions",
-      "organizations_url": "https://api.github.com/users/distri/orgs",
-      "repos_url": "https://api.github.com/users/distri/repos",
-      "events_url": "https://api.github.com/users/distri/events{/privacy}",
-      "received_events_url": "https://api.github.com/users/distri/received_events",
-      "type": "Organization",
-      "site_admin": false
-    },
-    "network_count": 0,
-    "subscribers_count": 1,
     "branch": "master",
-    "defaultBranch": "master"
+    "default_branch": "master",
+    "full_name": "distri/math",
+    "homepage": null,
+    "description": "Math is for cool guys.",
+    "html_url": "https://github.com/distri/math",
+    "url": "https://api.github.com/repos/distri/math",
+    "publishBranch": "gh-pages"
   },
   "dependencies": {
     "point": {
@@ -704,6 +599,70 @@ window["distri/math:master"]({
         "subscribers_count": 1,
         "branch": "v0.2.0",
         "defaultBranch": "master"
+      },
+      "dependencies": {}
+    },
+    "size": {
+      "source": {
+        "LICENSE": {
+          "path": "LICENSE",
+          "content": "The MIT License (MIT)\n\nCopyright (c) 2014 \n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+          "mode": "100644",
+          "type": "blob"
+        },
+        "README.md": {
+          "path": "README.md",
+          "content": "size\n====\n\n2d extent\n",
+          "mode": "100644",
+          "type": "blob"
+        },
+        "main.coffee.md": {
+          "path": "main.coffee.md",
+          "content": "Size\n====\n\nA simple 2d extent.\n\n    Size = (width, height) ->\n      if typeof width is \"object\"\n        {width, height} = width\n\n      width: width\n      height: height\n      __proto__: Size.prototype\n\n    Size.prototype =\n      scale: (scalar) ->\n        Size(@width * scalar, @height * scalar)\n\n      toString: ->\n        \"Size(#{@width}, #{@height})\"\n\n      max: (otherSize) ->\n        Size(\n          Math.max(@width, otherSize.width)\n          Math.max(@height, otherSize.height)\n        )\n\n      each: (iterator) ->\n        [0...@height].forEach (y) ->\n          [0...@width].forEach (x) ->\n            iterator(x, y)\n\n    module.exports = Size\n",
+          "mode": "100644"
+        },
+        "test/test.coffee": {
+          "path": "test/test.coffee",
+          "content": "Size = require \"../main\"\n\ndescribe \"Size\", ->\n  it \"should have a width and height\", ->\n    size = Size(10, 10)\n\n    assert.equal size.width, 10\n    assert.equal size.height, 10\n",
+          "mode": "100644"
+        },
+        "pixie.cson": {
+          "path": "pixie.cson",
+          "content": "version: \"0.1.0\"\n",
+          "mode": "100644"
+        }
+      },
+      "distribution": {
+        "main": {
+          "path": "main",
+          "content": "(function() {\n  var Size;\n\n  Size = function(width, height) {\n    var _ref;\n    if (typeof width === \"object\") {\n      _ref = width, width = _ref.width, height = _ref.height;\n    }\n    return {\n      width: width,\n      height: height,\n      __proto__: Size.prototype\n    };\n  };\n\n  Size.prototype = {\n    scale: function(scalar) {\n      return Size(this.width * scalar, this.height * scalar);\n    },\n    toString: function() {\n      return \"Size(\" + this.width + \", \" + this.height + \")\";\n    },\n    max: function(otherSize) {\n      return Size(Math.max(this.width, otherSize.width), Math.max(this.height, otherSize.height));\n    },\n    each: function(iterator) {\n      var _i, _ref, _results;\n      return (function() {\n        _results = [];\n        for (var _i = 0, _ref = this.height; 0 <= _ref ? _i < _ref : _i > _ref; 0 <= _ref ? _i++ : _i--){ _results.push(_i); }\n        return _results;\n      }).apply(this).forEach(function(y) {\n        var _i, _ref, _results;\n        return (function() {\n          _results = [];\n          for (var _i = 0, _ref = this.width; 0 <= _ref ? _i < _ref : _i > _ref; 0 <= _ref ? _i++ : _i--){ _results.push(_i); }\n          return _results;\n        }).apply(this).forEach(function(x) {\n          return iterator(x, y);\n        });\n      });\n    }\n  };\n\n  module.exports = Size;\n\n}).call(this);\n",
+          "type": "blob"
+        },
+        "test/test": {
+          "path": "test/test",
+          "content": "(function() {\n  var Size;\n\n  Size = require(\"../main\");\n\n  describe(\"Size\", function() {\n    return it(\"should have a width and height\", function() {\n      var size;\n      size = Size(10, 10);\n      assert.equal(size.width, 10);\n      return assert.equal(size.height, 10);\n    });\n  });\n\n}).call(this);\n",
+          "type": "blob"
+        },
+        "pixie": {
+          "path": "pixie",
+          "content": "module.exports = {\"version\":\"0.1.0\"};",
+          "type": "blob"
+        }
+      },
+      "progenitor": {
+        "url": "http://www.danielx.net/editor/"
+      },
+      "version": "0.1.0",
+      "entryPoint": "main",
+      "repository": {
+        "branch": "v0.1.0",
+        "default_branch": "master",
+        "full_name": "distri/size",
+        "homepage": null,
+        "description": "2d extent",
+        "html_url": "https://github.com/distri/size",
+        "url": "https://api.github.com/repos/distri/size",
+        "publishBranch": "gh-pages"
       },
       "dependencies": {}
     }
