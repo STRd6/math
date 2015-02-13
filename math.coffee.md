@@ -15,6 +15,7 @@ Require and export many math libraries.
       Point: Point
       Matrix: Matrix
       Random: Random
+      Rectangle: require "./rectangle"
       rand: Random.rand
       Size: Size
       version: require("./pixie").version
