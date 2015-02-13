@@ -186,7 +186,7 @@
     },
     "pixie.cson": {
       "path": "pixie.cson",
-      "content": "entryPoint: \"math\"\nversion: \"0.2.2\"\ndependencies:\n  point: \"distri/point:v0.2.0\"\n  matrix: \"distri/matrix:v0.3.1\"\n  random: \"distri/random:v0.2.0\"\n  size: \"distri/size:v0.1.4\"\n",
+      "content": "entryPoint: \"math\"\nversion: \"0.2.3\"\ndependencies:\n  point: \"distri/point:v0.2.0\"\n  matrix: \"distri/matrix:v0.3.1\"\n  random: \"distri/random:v0.2.0\"\n  size: \"distri/size:v0.1.4\"\n",
       "mode": "100644",
       "type": "blob"
     },
@@ -215,7 +215,7 @@
     },
     "pixie": {
       "path": "pixie",
-      "content": "module.exports = {\"entryPoint\":\"math\",\"version\":\"0.2.2\",\"dependencies\":{\"point\":\"distri/point:v0.2.0\",\"matrix\":\"distri/matrix:v0.3.1\",\"random\":\"distri/random:v0.2.0\",\"size\":\"distri/size:v0.1.4\"}};",
+      "content": "module.exports = {\"entryPoint\":\"math\",\"version\":\"0.2.3\",\"dependencies\":{\"point\":\"distri/point:v0.2.0\",\"matrix\":\"distri/matrix:v0.3.1\",\"random\":\"distri/random:v0.2.0\",\"size\":\"distri/size:v0.1.4\"}};",
       "type": "blob"
     },
     "test/math": {
@@ -237,7 +237,7 @@
   "progenitor": {
     "url": "http://www.danielx.net/editor/"
   },
-  "version": "0.2.2",
+  "version": "0.2.3",
   "entryPoint": "math",
   "repository": {
     "branch": "master",
