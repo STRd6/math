@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>math</title>
+  <title>rectangle</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="http://strd6.github.io/cdn/parallel/docco.css" />
@@ -18,7 +18,7 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1 id="math">Math</h1>
+              <h1 id="rectangle">Rectangle</h1>
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">
@@ -32,45 +32,31 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Require and export many math libraries.</p>
+              <p>A rectangle is a size at a given position.</p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">Point = require <span class="string">"point"</span>
+            <div class="content"><pre><code class="lang-coffeescript">{abs, min} = Math
+
 Size = require <span class="string">"size"</span>
 
-Matrix = require <span class="string">"matrix"</span>
-Matrix.Point = Point
+module.exports = <span class="function"><span class="title">Rectangle</span></span> = (position, size) -&gt;
+  console.log <span class="string">"lol rekt"</span>
+  <span class="keyword">if</span> position?.size?
+    {position, size} = position
 
-Random = require <span class="string">"random"</span>
+  position: Point(position)
+  size: Size(size)
+  __proto__: Rectangle.prototype
 
-module.exports = self =
-  Point: Point
-  Matrix: Matrix
-  Random: Random
-  Rectangle: require <span class="string">"./rectangle"</span>
-  rand: Random.rand
-  Size: Size
-  version: require(<span class="string">"./pixie"</span>).version</code></pre>
-</div>
-        </li>
-        
-        
-        <li id="section-3">
-            <div class="annotation">
-              <div class="pilwrap">
-                <a class="pilcrow" href="#section-3">&#182;</a>
-              </div>
-              <p>Pollute all libraries to the global namespace.</p>
+Rectangle.prototype =
+  each: (iterator) -&gt;
+    p = <span class="property">@position</span>
 
-            </div>
-            <div class="content"><pre><code class="lang-coffeescript">  pollute: -&gt;
-    Object.keys(self).forEach (key) -&gt;
-      <span class="keyword">return</span> <span class="keyword">if</span> key <span class="keyword">is</span> <span class="string">"version"</span>
-      <span class="keyword">return</span> <span class="keyword">if</span> key <span class="keyword">is</span> <span class="string">"pollute"</span>
+    <span class="property">@size</span>.each (x, y) -&gt;
+      iterator(p.x + x, p.y + y)
 
-      global[key] = self[key]
-
-    <span class="keyword">return</span> self</code></pre>
+Rectangle.<span class="function"><span class="title">fromPoints</span></span> = (start, end) -&gt;
+  Rectangle Point(min(start.x, end.x), min(start.y, end.y)), Size(abs(end.x - start.x), abs(end.y - start.y))</code></pre>
 </div>
         </li>
         
