@@ -32,7 +32,7 @@ window["distri/math:master"]({
     },
     "rectangle.coffee.md": {
       "path": "rectangle.coffee.md",
-      "content": "Rectangle\n=========\n\nA rectangle is a size at a given position.\n\n    {abs, min} = Math\n\n    Size = require \"size\"\n\n    module.exports = Rectangle = (position, size) ->\n      console.log \"lol rekt\"\n      if position?.size?\n        {position, size} = position\n\n      position: Point(position)\n      size: Size(size)\n      __proto__: Rectangle.prototype\n\n    Rectangle.prototype =\n      each: (iterator) ->\n        p = @position\n\n        @size.each (x, y) ->\n          iterator(p.x + x, p.y + y)\n\n    Rectangle.fromPoints = (start, end) ->\n      Rectangle Point(min(start.x, end.x), min(start.y, end.y)), Size(abs(end.x - start.x), abs(end.y - start.y))\n",
+      "content": "Rectangle\n=========\n\nA rectangle is a size at a given position.\n\n    {abs, min} = Math\n\n    Size = require \"size\"\n\n    module.exports = Rectangle = (position, size) ->\n      if position?.size?\n        {position, size} = position\n\n      position: Point(position)\n      size: Size(size)\n      __proto__: Rectangle.prototype\n\n    Rectangle.prototype =\n      each: (iterator) ->\n        p = @position\n\n        @size.each (x, y) ->\n          iterator(p.x + x, p.y + y)\n\n    Rectangle.fromPoints = (start, end) ->\n      Rectangle Point(min(start.x, end.x), min(start.y, end.y)), Size(abs(end.x - start.x), abs(end.y - start.y))\n",
       "mode": "100644"
     },
     "test/rectangle.coffee": {
@@ -59,7 +59,7 @@ window["distri/math:master"]({
     },
     "rectangle": {
       "path": "rectangle",
-      "content": "(function() {\n  var Rectangle, Size, abs, min;\n\n  abs = Math.abs, min = Math.min;\n\n  Size = require(\"size\");\n\n  module.exports = Rectangle = function(position, size) {\n    var _ref;\n    console.log(\"lol rekt\");\n    if ((position != null ? position.size : void 0) != null) {\n      _ref = position, position = _ref.position, size = _ref.size;\n    }\n    return {\n      position: Point(position),\n      size: Size(size),\n      __proto__: Rectangle.prototype\n    };\n  };\n\n  Rectangle.prototype = {\n    each: function(iterator) {\n      var p;\n      p = this.position;\n      return this.size.each(function(x, y) {\n        return iterator(p.x + x, p.y + y);\n      });\n    }\n  };\n\n  Rectangle.fromPoints = function(start, end) {\n    return Rectangle(Point(min(start.x, end.x), min(start.y, end.y)), Size(abs(end.x - start.x), abs(end.y - start.y)));\n  };\n\n}).call(this);\n",
+      "content": "(function() {\n  var Rectangle, Size, abs, min;\n\n  abs = Math.abs, min = Math.min;\n\n  Size = require(\"size\");\n\n  module.exports = Rectangle = function(position, size) {\n    var _ref;\n    if ((position != null ? position.size : void 0) != null) {\n      _ref = position, position = _ref.position, size = _ref.size;\n    }\n    return {\n      position: Point(position),\n      size: Size(size),\n      __proto__: Rectangle.prototype\n    };\n  };\n\n  Rectangle.prototype = {\n    each: function(iterator) {\n      var p;\n      p = this.position;\n      return this.size.each(function(x, y) {\n        return iterator(p.x + x, p.y + y);\n      });\n    }\n  };\n\n  Rectangle.fromPoints = function(start, end) {\n    return Rectangle(Point(min(start.x, end.x), min(start.y, end.y)), Size(abs(end.x - start.x), abs(end.y - start.y)));\n  };\n\n}).call(this);\n",
       "type": "blob"
     },
     "test/rectangle": {
