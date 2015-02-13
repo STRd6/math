@@ -8,7 +8,6 @@ A rectangle is a size at a given position.
     Size = require "size"
 
     module.exports = Rectangle = (position, size) ->
-      console.log "lol rekt"
       if position?.size?
         {position, size} = position
 
