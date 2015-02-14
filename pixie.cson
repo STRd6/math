@@ -1,5 +1,5 @@
 entryPoint: "math"
-version: "0.2.3"
+version: "0.2.4"
 dependencies:
   point: "distri/point:v0.2.0"
   matrix: "distri/matrix:v0.3.1"

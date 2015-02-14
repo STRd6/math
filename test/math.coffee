@@ -1,7 +1,5 @@
 require("../math").pollute()
 
-console.log global
-
 describe "Point", ->
   it "should exist", ->
     assert Point
