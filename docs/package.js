@@ -186,25 +186,27 @@
     },
     "pixie.cson": {
       "path": "pixie.cson",
-      "content": "entryPoint: \"math\"\nversion: \"0.2.3\"\ndependencies:\n  point: \"distri/point:v0.2.0\"\n  matrix: \"distri/matrix:v0.3.1\"\n  random: \"distri/random:v0.2.0\"\n  size: \"distri/size:v0.1.4\"\n",
-      "mode": "100644",
-      "type": "blob"
-    },
-    "test/math.coffee": {
-      "path": "test/math.coffee",
-      "content": "require(\"../math\").pollute()\n\nconsole.log global\n\ndescribe \"Point\", ->\n  it \"should exist\", ->\n    assert Point\n\n  it \"should construct points\", ->\n    assert Point()\n\ndescribe \"Matrix\", ->\n  it \"should exist and return matrices when invoked\", ->\n    assert Matrix\n\n    assert Matrix()\n\n  it \"should use the same `Point` class\", ->\n    assert Matrix.Point is Point\n\n    assert Matrix().transformPoint(Point()) instanceof Point\n\ndescribe \"Random\", ->\n  it \"should exist\", ->\n    assert Random\n\ndescribe \"rand\", ->\n  it \"should exist\", ->\n    assert rand\n\n    assert rand()?\n\ndescribe \"Size\", ->\n  it \"should exist\", ->\n    assert Size\n\ndescribe \"Math\", ->\n  it \"should have a version\", ->\n    assert require(\"../math\").version\n",
+      "content": "entryPoint: \"math\"\nversion: \"0.2.4\"\ndependencies:\n  point: \"distri/point:v0.2.0\"\n  matrix: \"distri/matrix:v0.3.1\"\n  random: \"distri/random:v0.2.0\"\n  size: \"distri/size:v0.1.4\"\n",
       "mode": "100644",
       "type": "blob"
     },
     "rectangle.coffee.md": {
       "path": "rectangle.coffee.md",
       "content": "Rectangle\n=========\n\nA rectangle is a size at a given position.\n\n    {abs, min} = Math\n\n    Size = require \"size\"\n\n    module.exports = Rectangle = (position, size) ->\n      if position?.size?\n        {position, size} = position\n\n      position: Point(position)\n      size: Size(size)\n      __proto__: Rectangle.prototype\n\n    Rectangle.prototype =\n      each: (iterator) ->\n        p = @position\n\n        @size.each (x, y) ->\n          iterator(p.x + x, p.y + y)\n\n    Rectangle.fromPoints = (start, end) ->\n      Rectangle Point(min(start.x, end.x), min(start.y, end.y)), Size(abs(end.x - start.x), abs(end.y - start.y))\n",
-      "mode": "100644"
+      "mode": "100644",
+      "type": "blob"
+    },
+    "test/math.coffee": {
+      "path": "test/math.coffee",
+      "content": "require(\"../math\").pollute()\n\ndescribe \"Point\", ->\n  it \"should exist\", ->\n    assert Point\n\n  it \"should construct points\", ->\n    assert Point()\n\ndescribe \"Matrix\", ->\n  it \"should exist and return matrices when invoked\", ->\n    assert Matrix\n\n    assert Matrix()\n\n  it \"should use the same `Point` class\", ->\n    assert Matrix.Point is Point\n\n    assert Matrix().transformPoint(Point()) instanceof Point\n\ndescribe \"Random\", ->\n  it \"should exist\", ->\n    assert Random\n\ndescribe \"rand\", ->\n  it \"should exist\", ->\n    assert rand\n\n    assert rand()?\n\ndescribe \"Size\", ->\n  it \"should exist\", ->\n    assert Size\n\ndescribe \"Math\", ->\n  it \"should have a version\", ->\n    assert require(\"../math\").version\n",
+      "mode": "100644",
+      "type": "blob"
     },
     "test/rectangle.coffee": {
       "path": "test/rectangle.coffee",
       "content": "{Point, Size, Rectangle} = require \"../math\"\n\ndescribe \"rectangle\", ->\n  it \"should iterate\", ->\n    rectangle = Rectangle\n      position: Point(2, 2)\n      size: Size(2, 2)\n\n    total = 0\n    rectangle.each (x, y) ->\n      total += 1\n\n    assert.equal total, 4\n",
-      "mode": "100644"
+      "mode": "100644",
+      "type": "blob"
     }
   },
   "distribution": {
@@ -215,17 +217,17 @@
     },
     "pixie": {
       "path": "pixie",
-      "content": "module.exports = {\"entryPoint\":\"math\",\"version\":\"0.2.3\",\"dependencies\":{\"point\":\"distri/point:v0.2.0\",\"matrix\":\"distri/matrix:v0.3.1\",\"random\":\"distri/random:v0.2.0\",\"size\":\"distri/size:v0.1.4\"}};",
-      "type": "blob"
-    },
-    "test/math": {
-      "path": "test/math",
-      "content": "(function() {\n  require(\"../math\").pollute();\n\n  console.log(global);\n\n  describe(\"Point\", function() {\n    it(\"should exist\", function() {\n      return assert(Point);\n    });\n    return it(\"should construct points\", function() {\n      return assert(Point());\n    });\n  });\n\n  describe(\"Matrix\", function() {\n    it(\"should exist and return matrices when invoked\", function() {\n      assert(Matrix);\n      return assert(Matrix());\n    });\n    return it(\"should use the same `Point` class\", function() {\n      assert(Matrix.Point === Point);\n      return assert(Matrix().transformPoint(Point()) instanceof Point);\n    });\n  });\n\n  describe(\"Random\", function() {\n    return it(\"should exist\", function() {\n      return assert(Random);\n    });\n  });\n\n  describe(\"rand\", function() {\n    return it(\"should exist\", function() {\n      assert(rand);\n      return assert(rand() != null);\n    });\n  });\n\n  describe(\"Size\", function() {\n    return it(\"should exist\", function() {\n      return assert(Size);\n    });\n  });\n\n  describe(\"Math\", function() {\n    return it(\"should have a version\", function() {\n      return assert(require(\"../math\").version);\n    });\n  });\n\n}).call(this);\n",
+      "content": "module.exports = {\"entryPoint\":\"math\",\"version\":\"0.2.4\",\"dependencies\":{\"point\":\"distri/point:v0.2.0\",\"matrix\":\"distri/matrix:v0.3.1\",\"random\":\"distri/random:v0.2.0\",\"size\":\"distri/size:v0.1.4\"}};",
       "type": "blob"
     },
     "rectangle": {
       "path": "rectangle",
       "content": "(function() {\n  var Rectangle, Size, abs, min;\n\n  abs = Math.abs, min = Math.min;\n\n  Size = require(\"size\");\n\n  module.exports = Rectangle = function(position, size) {\n    var _ref;\n    if ((position != null ? position.size : void 0) != null) {\n      _ref = position, position = _ref.position, size = _ref.size;\n    }\n    return {\n      position: Point(position),\n      size: Size(size),\n      __proto__: Rectangle.prototype\n    };\n  };\n\n  Rectangle.prototype = {\n    each: function(iterator) {\n      var p;\n      p = this.position;\n      return this.size.each(function(x, y) {\n        return iterator(p.x + x, p.y + y);\n      });\n    }\n  };\n\n  Rectangle.fromPoints = function(start, end) {\n    return Rectangle(Point(min(start.x, end.x), min(start.y, end.y)), Size(abs(end.x - start.x), abs(end.y - start.y)));\n  };\n\n}).call(this);\n",
+      "type": "blob"
+    },
+    "test/math": {
+      "path": "test/math",
+      "content": "(function() {\n  require(\"../math\").pollute();\n\n  describe(\"Point\", function() {\n    it(\"should exist\", function() {\n      return assert(Point);\n    });\n    return it(\"should construct points\", function() {\n      return assert(Point());\n    });\n  });\n\n  describe(\"Matrix\", function() {\n    it(\"should exist and return matrices when invoked\", function() {\n      assert(Matrix);\n      return assert(Matrix());\n    });\n    return it(\"should use the same `Point` class\", function() {\n      assert(Matrix.Point === Point);\n      return assert(Matrix().transformPoint(Point()) instanceof Point);\n    });\n  });\n\n  describe(\"Random\", function() {\n    return it(\"should exist\", function() {\n      return assert(Random);\n    });\n  });\n\n  describe(\"rand\", function() {\n    return it(\"should exist\", function() {\n      assert(rand);\n      return assert(rand() != null);\n    });\n  });\n\n  describe(\"Size\", function() {\n    return it(\"should exist\", function() {\n      return assert(Size);\n    });\n  });\n\n  describe(\"Math\", function() {\n    return it(\"should have a version\", function() {\n      return assert(require(\"../math\").version);\n    });\n  });\n\n}).call(this);\n",
       "type": "blob"
     },
     "test/rectangle": {
@@ -237,7 +239,7 @@
   "progenitor": {
     "url": "http://www.danielx.net/editor/"
   },
-  "version": "0.2.3",
+  "version": "0.2.4",
   "entryPoint": "math",
   "repository": {
     "branch": "master",
