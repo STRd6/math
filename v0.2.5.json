@@ -76,7 +76,7 @@
   "version": "0.2.5",
   "entryPoint": "math",
   "repository": {
-    "branch": "master",
+    "branch": "v0.2.5",
     "default_branch": "master",
     "full_name": "distri/math",
     "homepage": null,
